@@ -1,2 +1,3 @@
 # info201project
-Ashley Varma
+Team members:
+Owla Mohamed, Ashley Varma, Krystal Liang, Amy Latimer
