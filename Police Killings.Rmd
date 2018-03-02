@@ -6,4 +6,26 @@ output: html_document
 runtime: shiny
 ---
 
+```{setup, echo=FALSE}
+  packages(dplyr)
+  packages(ggplot2)
+  source('Question 1.R')
+```
 
+###Is there a relationship between the socioeconomic status of a county and
+###the number of police killings in that county? 
+
+``` {echo=FALSE, message=TRUE}
+  ggplot(data = police.killings) +
+    stat_count(mapping = aes(x = class))
+```
+```{Plot 1, echo=FALSE}
+
+inputPanel(
+  sliderInput('income', 'County Income', min = min1, max = max1, value = min1, step = 1,000)
+)
+
+renderPlot({
+  hist()
+})
+```
