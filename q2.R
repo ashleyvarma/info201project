@@ -12,6 +12,7 @@ library(ggplot2)
 
 
 data <- read.csv('data/police_killings.csv', stringsAsFactors = FALSE, na.strings = c("", "NA"))
+states <- read.csv('states.csv', stringsAsFactors = FALSE)
 state.names <- states$StateName[1:51]
 law.enforcement.agency <- c("Millbrook Police Department", "Rapides Parish Sheriff's Office", "Fremont Police Department",                 
                             "Emeryville Police Department", "Wichita County Sheriff's Office", "North Charleston Police Department",
