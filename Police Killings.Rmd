@@ -6,26 +6,47 @@ output: html_document
 runtime: shiny
 ---
 
-```{setup, echo=FALSE}
-  packages(dplyr)
-  packages(ggplot2)
-  source('Question 1.R')
+```{R setup, echo=FALSE, message=FALSE}
+  library(shiny)
+  library(dplyr)
+  library(ggplot2)
+  source('Question 1.R/app.R')
 ```
 
 ###Is there a relationship between the socioeconomic status of a county and
 ###the number of police killings in that county? 
 
-``` {echo=FALSE, message=TRUE}
-  ggplot(data = police.killings) +
-    stat_count(mapping = aes(x = class))
-```
-```{Plot 1, echo=FALSE}
-
-inputPanel(
-  sliderInput('income', 'County Income', min = min1, max = max1, value = min1, step = 1,000)
+```{R vis1, echo=FALSE}
+select.options <- c('County Income', 'Unemployment Rate', 'Bachelor Degree or Higher', 'Percent White', 'Percent Black', 'Percent Hispanic')
+options.graph <- c('county_income', 'urate', 'college','share_white', 'share_black', 'share_hispanic')
+name.frame <- data.frame(select.options, options.graph)
+                    
+# Define UI for application that draws a histogram
+ui <- fluidPage (
+   titlePanel('Distributions'),
+   sidebarLayout(
+      sidebarPanel(
+         selectInput('option', 'Police killings based on:', select.options, multiple = FALSE),
+         radioButtons('plot', 'Display as:', choices = 'Histogram')
+      ),
+      mainPanel(
+         plotOutput("distPlot")
+      )
+   )
 )
 
-renderPlot({
-  hist()
-})
+server <- function(input, output) {
+   output$distPlot <- renderPlot({
+      aes <- filter(name.frame, select.options==!!as.name(input$option))
+      aes <- aes[1, 2]
+      ggplot(data=police.killings, paste0('police.killings$', aes)) + 
+        geom_histogram(aes(y = ..count..), bins = 9, colour = 'grey',
+                       fill = 'red') +
+        labs(x = "Median County Income (USD)", y = "Count") +
+        geom_vline(xintercept = 57230, linetype ='dashed', 
+                   color = 'black', size = 1)
+   })
+}
+
+shinyApp(ui = ui, server = server)
 ```
