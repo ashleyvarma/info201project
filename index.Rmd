@@ -1,10 +1,11 @@
 ---
-title: "Police Killings"
+title: "Police Shootings in the United States: A Data-Based Perspective"
 author: "Amy Latimer, Krystal Liang, Ashley Varma"
-date: "3/1/2018"
-output: prettydoc::html_pretty:
-          theme: cayman
-          highlight: github
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
 runtime: shiny
 ---
 ```{R setup, include=FALSE}
@@ -19,10 +20,9 @@ runtime: shiny
   source("Amy Data Wrangling.R")
 ```
 
-###Is there a relationship between the socioeconomic status of a county and
-###the number of police killings in that county? 
+###Is there a relationship between the socioeconomic status of a county and the number of fatal police shootings in that county? 
 
-
+Below is an interactive visualization of police shootings from 2015 distributed by various social and economic factors. It takes the form of a histogram, which shows the count of the data falling into each ' _bin_ on the x-axis. Histograms are excellent for revealing potential cause and effect relationships in data.
 ```{R vis1, echo=FALSE}
 select.options <- c('County Income (USD)', 'Tract level unemployment rate (%)', 'Bachelor Degree or Higher', 'Tract level poverty rate (%)', '% White, County Level', '% Black, County Level', '% Hispanic, County Level')
 options.graph <- c('county_income', 'urate', 'college', 'pov', 'share_white', 'share_black', 'share_hispanic')
@@ -66,17 +66,19 @@ shinyApp(ui = ui, server = server)
 
 
 
+*************************************************************
+
+
 ###How do race and ethnicity relate to the number of police killings in the United States?
 
 ```{R vis3, echo=FALSE}
 bar.graph
 ```
-**You are able to hover over the bars to view how many people in total were killed corresponding to the specified race/ethnicity**
+**Hover over the bars to view how many were killed for each racial demographic**
 
-You may think at first when you are viewing this visualization, "the graph shows that more white people were killed altogether". However, this is where the graph is misleading if you don't have all the information you need about how the numbers in the graph are proportionate to the percent population of those specific races/ethnicities.
+Noticeably, this graph shows that whites were killed more often than any minority. This finding does not fit with current conversations relating to police violence, which often claim that minorities are disproportionately affected by police killings. This graph must be supplemented with United States Census data to understand the full picture, or it is otherwise misleading. 
 
-According to the United States Census Bureu data, in 2017, the estimated population for the 
-country was 325,719,178 people. [According to the 2016 census data](https://www.census.gov/quickfacts/fact/table/US#viewtop)
+Below is table of the nation's racial demographics [according to census data from 2016](https://www.census.gov/quickfacts/fact/table/US#viewtop).
 
 Race/Ethnicity | Percentage of the Population
 :---:|:----:
@@ -86,20 +88,29 @@ Hawaiian/Pacific Islander | 0.2%
 Black/African American | 13.3%
 White alone (not Hispanic/Latino) | 61.3%
 
-If you add up the values for people of color and compare that number to people who are white alone, ignoring the "unknown" column, you can see that the numbers are pretty close at **216 People of Color** vs **236 People who were White alone**. This is important to note because this reveals that more people of color were actually killed altogether in all of the US compared to people who are white alone. Since the population of white people are higher, less white people were killed altogether. This conclusion correlates to what the media displays as well. There seems to always be more talk about the death of people of color compared to white people when it comes to gun violence in America.
+Although people of color make up 39% of the United States population, they accounted for 48% of fatal police shootings in 2015. This difference of 9% is _disproportionately more_ than their demographic. Based on this analysis alone there seems to be merit to an idea portrayed nearly univerally in the media, without much evidence: that people of color are more often at the receving end of police brutality than white people. 
 
-###How does the average poverty rate (calculated by averaging the tract level poverty rate (rate for smaller areas of a bigger county) for each state correlate to the amount of killings present in each state?
+
+*************************************************************
+
+
+###How does the average poverty rate for a state relate to the number of police killings in that state?
 
 ```{R vis4, echo=FALSE}
 p
-
 ```
-**You are able to hover over each state to view the average poverty rate for each state and the amount of people killed in that state**
+**Hover a state to view how many were killed and the average poverty rate for that state. The red dots are the locations of fatal police shootings.**
+
+
+*************************************************************
+###Have the number of police killings changed in the past few years?
+
+The answer to that question, tragically, is **no**. Below is an interactive plot of all fatal police shootings from 2015-present. Steadily, there have been about 30 police killings per month since 2015. The deaths of Philando Castile and Eric Garner are marked below, and not even the nation-wide outcry against those deaths had a measurable affect on police shootings.  
 
 ```{R vis5, echo=FALSE}
 monthly.killings
 ```
 
 
-
+*************************************************************
 
