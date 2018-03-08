@@ -1,6 +1,7 @@
 library("dplyr")
 library("ggplot2")
 library(plotly)
+library(tidyr)
 
 # Reads the csv file that contains all the data needed for Q3
 shooting.data <- read.csv(file="police_killings.csv", stringsAsFactors = FALSE)
@@ -26,23 +27,24 @@ bar.graph.text <- c('4 People Killed', '10 People Killed', '15 People Killed',
                     '67 People Killed', '135 People Killed', '236 People Killed')
 bar.graph.data <- data.frame(bar.graph.x.names, bar.graph.y, bar.graph.text)
 
-f <- list(
+font <- list(
   family = "Arial",
   size = 18,
   color = "black"
 )
+
 bar.graph <- plot_ly(bar.graph.data, x = ~bar.graph.x.names, y = ~bar.graph.y, type = 'bar', 
              text = bar.graph.text,
              marker = list(color = 'rgb(158,202,225)',
                            line = list(color = 'rgb(8,48,107)', width = 1.5))) %>%
             layout(title = "Proportion Of People Killed Based On Race/Ethnicity In the US",
-                   titlefont = f,
+                   titlefont = font,
                    margin = list(b = 100,
                                  t = 50),
                    xaxis = bar.graph.x,
                    yaxis = list(title = "Number of People Killed",
                                 tickangle = 0,
-                                titlefont = f))
+                                titlefont = font))
 
 ## In America the percentage of people who are White are about 70% leaving the rest of the
 ## people colored of "unidentified". If you add up the values for those who are of color vs.
@@ -102,5 +104,3 @@ p <- plot_geo(race.pov.data, locationmode = 'USA-states') %>%
     title = 'Average Poverty Rates vs. Number of Deaths',
     geo = g
   )
-
-## 
