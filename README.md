@@ -1,4 +1,4 @@
-# info201project
+# Police Shootings in the United States: A Data-Based Perspective
 Team members:
 Owla Mohamed, Ashley Varma, Krystal Liang, Amy Latimer
 
@@ -8,4 +8,4 @@ different evaluations of the data through data visualizations. You are able to
 analyze how race affects the number of deaths that occurred, you can analyze
 how socioeconomic status affects the deaths in every county in addition to
 other types of variables that result in why certain number of people were
-killed. 
+killed.
